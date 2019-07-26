@@ -1,13 +1,27 @@
 library(phonR)
 library(ggplot2)
 
+#library(xlsx)
+#read.xlsx("myfile.xlsx", sheetName = "Sheet1")
+
 # Read the vowels
-fileCIM = "C:\\Users\\Bender\\Desktop\\rolando\\universidad\\dartmouth\\research\\201907 cim vowels\\cim-vowels-20190615-1859.csv"
+fileCIM = "C:\\Users\\Bender\\Desktop\\rolando\\universidad\\dartmouth\\research\\201907 cim vowels\\cim-phones-20190726-1634.csv"
 cim <- read.csv(file=fileCIM, header=TRUE, sep=",")
-vowels = subset(cim, TextGridLabel == "a" | TextGridLabel == "e" | TextGridLabel == "i" | TextGridLabel == "o" | TextGridLabel == "u" |
-                      TextGridLabel == "a" | TextGridLabel == "e" | TextGridLabel == "i" | TextGridLabel == "o" | TextGridLabel == "u" )
+
+#cim$phone = as.character(cim$phone)
+#cim$phone <- gsub('ax', 'ā', cim$phone)
+#cim$phone <- gsub('ex', 'ē', cim$phone)
+
+#vowels = subset(cim, TextGridLabel == "a" | TextGridLabel == "e" | TextGridLabel == "i" | TextGridLabel == "o" | TextGridLabel == "u" |
+#                      TextGridLabel == "ā" | TextGridLabel == "ē" | TextGridLabel == "ī" | TextGridLabel == "ō" | TextGridLabel == "ū" )
+#vowels$TextGridLabel = as.factor(as.character(vowels$TextGridLabel))
+
+vowels = subset(cim, phone == "a" | phone == "e" | phone == "i" | phone == "o" | phone == "u" |
+                     phone == "ax" | phone == "ex" | phone == "ix" | phone == "ox" | phone == "ux")
 vowels$TextGridLabel = as.factor(as.character(vowels$TextGridLabel))
+vowels$phone = as.factor(as.character(vowels$phone))
 unique(vowels$TextGridLabel)
+unique(vowels$phone)
 
 # Create additional information 
 vowels$vLength = "long"
@@ -17,19 +31,38 @@ vowels$island[vowels$Filename=="atiu-targetWords-20171029"] = "Atiu"
 vowels$island[vowels$Filename=="EMM20160413MuseumWordStressZ"] = "Ma'uke"
 vowels$island[vowels$Filename=="ETauRongo20160414HSBNWS"] = "Rarotonga"
 vowels$island[vowels$Filename=="ETauRongo20160414HSBSentences"] = "Rarotonga"
-vowels$island[vowels$Filename=="glottalsaitutaki201708291447"] = "Aitutaki"
+vowels$island[vowels$Filename=="glottals-aitutaki-20170829-1447"] = "Aitutaki"
+vowels$island[vowels$Filename=="20170829EGlAna"] = "Aitutaki"
 vowels$island[vowels$Filename=="KoNgaeTaRima"] = "Rarotonga"
 vowels$island[vowels$Filename=="SATN_Election_2011_A_CIM"] = "Rarotonga"
 vowels$island = as.factor(vowels$island)
 unique(vowels$island)
 vowels$segment = "a"
-vowels$segment[vowels$TextGridLabel == "a" | vowels$TextGridLabel == "a"] = "a"
-vowels$segment[vowels$TextGridLabel == "e" | vowels$TextGridLabel == "e"] = "e"
-vowels$segment[vowels$TextGridLabel == "i" | vowels$TextGridLabel == "i"] = "i"
-vowels$segment[vowels$TextGridLabel == "o" | vowels$TextGridLabel == "o"] = "o"
-vowels$segment[vowels$TextGridLabel == "u" | vowels$TextGridLabel == "u"] = "u"
+vowels$segment[vowels$TextGridLabel == "a" | vowels$TextGridLabel == "ā"] = "a"
+vowels$segment[vowels$TextGridLabel == "e" | vowels$TextGridLabel == "ē"] = "e"
+vowels$segment[vowels$TextGridLabel == "i" | vowels$TextGridLabel == "ī"] = "i"
+vowels$segment[vowels$TextGridLabel == "o" | vowels$TextGridLabel == "ō"] = "o"
+vowels$segment[vowels$TextGridLabel == "u" | vowels$TextGridLabel == "ū"] = "u"
 vowels$segment = as.factor(vowels$segment)
 unique(vowels$segment)
+
+# =================================
+# leave only hand-corrected vowels
+# =================================
+
+unique(vowels$Filename)
+vowels$start = as.numeric(as.character(vowels$start))
+vowels$duration = as.numeric(as.character(vowels$duration))
+
+vowels = subset(vowels, type=="vowel" & 
+                  ((Filename == "ETauRongo20160414HSBNWS" & start<60) | 
+                     (Filename == "EDS1PiriMarearai20150529HSB" & start<130)|
+                     (Filename == "EMM20160413MuseumWordStressZ" & start<120)|
+                     (Filename == "20170829EGlAna"& start<100)|
+                     (Filename == "SATN_Election_2011_A_CIM")
+                  ))
+
+vowels = subset(vowels, duration > 0.005)
 
 
 # =================================
@@ -58,14 +91,19 @@ vowels$sdLogF1[vowels$Filename=="ETauRongo20160414HSBNWS"]   = sd(vowels$logf1[v
 vowels$meanLogF1[vowels$Filename=="ETauRongo20160414HSBSentences"] = mean(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBSentences"])
 vowels$sdLogF1[vowels$Filename=="ETauRongo20160414HSBSentences"]   = sd(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBSentences"])
 
-vowels$meanLogF1[vowels$Filename=="glottalsaitutaki201708291447"] = mean(vowels$logf1[vowels$Filename=="glottalsaitutaki201708291447"])
-vowels$sdLogF1[vowels$Filename=="glottalsaitutaki201708291447"]   = sd(vowels$logf1[vowels$Filename=="glottalsaitutaki201708291447"])
+vowels$meanLogF1[vowels$Filename=="glottals-aitutaki-20170829-1447"] = mean(vowels$logf1[vowels$Filename=="glottals-aitutaki-20170829-1447"])
+vowels$sdLogF1[vowels$Filename=="glottals-aitutaki-20170829-1447"]   = sd(vowels$logf1[vowels$Filename=="glottals-aitutaki-20170829-1447"])
+
+vowels$meanLogF1[vowels$Filename=="20170829EGlAna"] = mean(vowels$logf1[vowels$Filename=="20170829EGlAna"])
+vowels$sdLogF1[vowels$Filename=="20170829EGlAna"]   = sd(vowels$logf1[vowels$Filename=="20170829EGlAna"])
 
 vowels$meanLogF1[vowels$Filename=="KoNgaeTaRima"] = mean(vowels$logf1[vowels$Filename=="KoNgaeTaRima"])
 vowels$sdLogF1[vowels$Filename=="KoNgaeTaRima"]   = sd(vowels$logf1[vowels$Filename=="KoNgaeTaRima"])
 
 vowels$meanLogF1[vowels$Filename=="SATN_Election_2011_A_CIM"] = mean(vowels$logf1[vowels$Filename=="SATN_Election_2011_A_CIM"])
 vowels$sdLogF1[vowels$Filename=="SATN_Election_2011_A_CIM"]   = sd(vowels$logf1[vowels$Filename=="SATN_Election_2011_A_CIM"])
+
+#-----
 
 vowels$meanLogF2[vowels$Filename=="EDS1PiriMarearai20150529HSB"] = mean(vowels$logf2[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
 vowels$sdLogF2[vowels$Filename=="EDS1PiriMarearai20150529HSB"]   = sd(vowels$logf2[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
@@ -82,8 +120,11 @@ vowels$sdLogF2[vowels$Filename=="ETauRongo20160414HSBNWS"]   = sd(vowels$logf2[v
 vowels$meanLogF2[vowels$Filename=="ETauRongo20160414HSBSentences"] = mean(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBSentences"])
 vowels$sdLogF2[vowels$Filename=="ETauRongo20160414HSBSentences"]   = sd(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBSentences"])
 
-vowels$meanLogF2[vowels$Filename=="glottalsaitutaki201708291447"] = mean(vowels$logf2[vowels$Filename=="glottalsaitutaki201708291447"])
-vowels$sdLogF2[vowels$Filename=="glottalsaitutaki201708291447"]   = sd(vowels$logf2[vowels$Filename=="glottalsaitutaki201708291447"])
+vowels$meanLogF2[vowels$Filename=="glottals-aitutaki-20170829-1447"] = mean(vowels$logf2[vowels$Filename=="glottals-aitutaki-20170829-1447"])
+vowels$sdLogF2[vowels$Filename=="glottals-aitutaki-20170829-1447"]   = sd(vowels$logf2[vowels$Filename=="glottals-aitutaki-20170829-1447"])
+
+vowels$meanLogF2[vowels$Filename=="20170829EGlAna"] = mean(vowels$logf2[vowels$Filename=="20170829EGlAna"])
+vowels$sdLogF2[vowels$Filename=="20170829EGlAna"]   = sd(vowels$logf2[vowels$Filename=="20170829EGlAna"])
 
 vowels$meanLogF2[vowels$Filename=="KoNgaeTaRima"] = mean(vowels$logf2[vowels$Filename=="KoNgaeTaRima"])
 vowels$sdLogF2[vowels$Filename=="KoNgaeTaRima"]   = sd(vowels$logf2[vowels$Filename=="KoNgaeTaRima"])
@@ -98,6 +139,11 @@ unique(vowels$meanLogF1)
 
 
 
+# =================================
+# charts
+# =================================
+
+
 with(vowels, plotVowels(F1_midpoint, F2_midpoint))
 with(vowels, plotVowels(F1_midpoint, F2_midpoint, var.sty.by = island, var.col.by = island))
 
@@ -108,18 +154,39 @@ with(vowels, plotVowels(F1_midpoint, F2_midpoint, TextGridLabel, group = island,
 
 s = subset(vowels, vLength=="short")
 s = subset(vowels, vLength=="long")
-with(s, plotVowels(zf1, zf2, TextGridLabel, group = island, var.col.by = island, var.sty.by = island, 
-                      plot.tokens = FALSE, plot.means = TRUE, pch.means = TextGridLabel, cex.means = 2, pretty = TRUE, 
+with(s, plotVowels(zf1, zf2, phone, group = island, var.col.by = island, var.sty.by = island, 
+                      plot.tokens = FALSE, plot.means = TRUE, pch.means = phone, cex.means = 2, pretty = TRUE, 
                       #xlim=c(1.5,-1.5),ylim=c(1.5,-1.5),
-                      xlim=c(2,-2),ylim=c(2,-2),
+                      xlim=c(2,-2.1),ylim=c(2,-2),
                       poly.line = TRUE, 
-                      poly.order = c("i", "e", "a", "o", "u"), 
-                      #poly.order = c("ī", "ē", "ā", "ō", "ū"), 
+                      #poly.order = c("i", "e", "a", "o", "u"), 
+                      poly.order = c("ix", "ex", "ax", "ox", "ux"), 
+                      #poly.order = c("Ä«", "Ä", "Ä", "Å", "Å«"), 
+                      xlab="F2 (z-score semitones)",
+                      ylab="F1 (z-score semitones)",
                       legend.kwd = "bottomleft", 
-                      legend.args = list(seg.len = 3, cex = 1.2, lwd = 2), col = c("gray70", "black", 
-                                                                                   "gray40", "black"), lty = c("solid", "dashed", "dotted")))
+                      legend.args = list(seg.len = 2, cex = 1.2, lwd = 2), col = c("gray70", "black", 
+                                                                                   "gray40", "black"), lty = c("solid", "dashed", "dotted", "solid")))
 
-table(vowels$TextGridLabel, vowels$island)
+s$phone = as.factor(as.character(s$phone))
+unique(s$island)
+table(s$phone, s$island)
+
+
+# ===================================================
+# https://guilhermegarcia.github.io/vowels.html
+# ===================================================
+
+ggplot(data = s, aes(x = zf2, y = zf1, color = phone, label = phone)) + facet_wrap( ~ island, ncol=2) + 
+  geom_text() + 
+  scale_y_reverse(position = "right") + 
+  scale_x_reverse(position = "top") + 
+  geom_density_2d() +
+  theme(legend.position = "none")+
+  xlim(2, -2) + ylim(2, -2)
+
+
+
 
 
 # ===============================
@@ -164,11 +231,11 @@ diph$island[diph$Filename=="SATN_Election_2011_A_CIM"] = "Rarotonga"
 diph$island = as.factor(diph$island)
 unique(diph$island)
 diph$segment = "a"
-diph$segment[diph$TextGridLabel == "a" | diph$TextGridLabel == "a"] = "a"
-diph$segment[diph$TextGridLabel == "e" | diph$TextGridLabel == "e"] = "e"
-diph$segment[diph$TextGridLabel == "i" | diph$TextGridLabel == "i"] = "i"
-diph$segment[diph$TextGridLabel == "o" | diph$TextGridLabel == "o"] = "o"
-diph$segment[diph$TextGridLabel == "u" | diph$TextGridLabel == "u"] = "u"
+diph$segment[diph$TextGridLabel == "a" | diph$TextGridLabel == "ā"] = "a"
+diph$segment[diph$TextGridLabel == "e" | diph$TextGridLabel == "ē"] = "e"
+diph$segment[diph$TextGridLabel == "i" | diph$TextGridLabel == "ī"] = "i"
+diph$segment[diph$TextGridLabel == "o" | diph$TextGridLabel == "ō"] = "o"
+diph$segment[diph$TextGridLabel == "u" | diph$TextGridLabel == "ū"] = "u"
 diph$segment = as.factor(diph$segment)
 unique(diph$segment)
 
