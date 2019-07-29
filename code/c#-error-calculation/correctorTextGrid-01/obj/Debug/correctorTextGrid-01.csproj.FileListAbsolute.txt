@@ -1,0 +1,19 @@
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.exe.config
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.exe
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.pdb
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.csprojResolveAssemblyReference.cache
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid_01.Properties.Resources.resources
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.csproj.GenerateResource.Cache
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.exe
+c:\users\bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.pdb
+C:\Users\Bender\documents\visual studio 2015\Projects\correctorTextGrid-01\correctorTextGrid-01\obj\Debug\correctorTextGrid_01.Form1.resources
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.exe.config
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.exe
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\bin\Debug\correctorTextGrid-01.pdb
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.csprojAssemblyReference.cache
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid_01.Form1.resources
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid_01.Properties.Resources.resources
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.csproj.GenerateResource.cache
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.csproj.CoreCompileInputs.cache
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.exe
+C:\Users\Bender\Desktop\corr\correctorTextGrid-01\obj\Debug\correctorTextGrid-01.pdb
