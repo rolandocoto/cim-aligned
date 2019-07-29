@@ -38,11 +38,11 @@ vowels$island[vowels$Filename=="SATN_Election_2011_A_CIM"] = "Rarotonga"
 vowels$island = as.factor(vowels$island)
 unique(vowels$island)
 vowels$segment = "a"
-vowels$segment[vowels$TextGridLabel == "a" | vowels$TextGridLabel == "ā"] = "a"
-vowels$segment[vowels$TextGridLabel == "e" | vowels$TextGridLabel == "ē"] = "e"
-vowels$segment[vowels$TextGridLabel == "i" | vowels$TextGridLabel == "ī"] = "i"
-vowels$segment[vowels$TextGridLabel == "o" | vowels$TextGridLabel == "ō"] = "o"
-vowels$segment[vowels$TextGridLabel == "u" | vowels$TextGridLabel == "ū"] = "u"
+vowels$segment[vowels$phone == "a" | vowels$phone == "ax"] = "a" #ā
+vowels$segment[vowels$phone == "e" | vowels$phone == "ex"] = "e" #ē
+vowels$segment[vowels$phone == "i" | vowels$phone == "ix"] = "i" #ī
+vowels$segment[vowels$phone == "o" | vowels$phone == "ox"] = "o" #ō
+vowels$segment[vowels$phone == "u" | vowels$phone == "ux"] = "u" #ū
 vowels$segment = as.factor(vowels$segment)
 unique(vowels$segment)
 
@@ -76,67 +76,18 @@ vowels$logf2 = log(vowels$F2_midpoint)
 vowels$meanLogF1 = -999
 vowels$sdLogF1 = -999
 
-vowels$meanLogF1[vowels$Filename=="EDS1PiriMarearai20150529HSB"] = mean(vowels$logf1[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
-vowels$sdLogF1[vowels$Filename=="EDS1PiriMarearai20150529HSB"]   = sd(vowels$logf1[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
-
-vowels$meanLogF1[vowels$Filename=="atiu-targetWords-20171029"] = mean(vowels$logf1[vowels$Filename=="atiu-targetWords-20171029"])
-vowels$sdLogF1[vowels$Filename=="atiu-targetWords-20171029"]   = sd(vowels$logf1[vowels$Filename=="atiu-targetWords-20171029"])
-
-vowels$meanLogF1[vowels$Filename=="EMM20160413MuseumWordStressZ"] = mean(vowels$logf1[vowels$Filename=="EMM20160413MuseumWordStressZ"])
-vowels$sdLogF1[vowels$Filename=="EMM20160413MuseumWordStressZ"]   = sd(vowels$logf1[vowels$Filename=="EMM20160413MuseumWordStressZ"])
-
-vowels$meanLogF1[vowels$Filename=="ETauRongo20160414HSBNWS"] = mean(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBNWS"])
-vowels$sdLogF1[vowels$Filename=="ETauRongo20160414HSBNWS"]   = sd(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBNWS"])
-
-vowels$meanLogF1[vowels$Filename=="ETauRongo20160414HSBSentences"] = mean(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBSentences"])
-vowels$sdLogF1[vowels$Filename=="ETauRongo20160414HSBSentences"]   = sd(vowels$logf1[vowels$Filename=="ETauRongo20160414HSBSentences"])
-
-vowels$meanLogF1[vowels$Filename=="glottals-aitutaki-20170829-1447"] = mean(vowels$logf1[vowels$Filename=="glottals-aitutaki-20170829-1447"])
-vowels$sdLogF1[vowels$Filename=="glottals-aitutaki-20170829-1447"]   = sd(vowels$logf1[vowels$Filename=="glottals-aitutaki-20170829-1447"])
-
-vowels$meanLogF1[vowels$Filename=="20170829EGlAna"] = mean(vowels$logf1[vowels$Filename=="20170829EGlAna"])
-vowels$sdLogF1[vowels$Filename=="20170829EGlAna"]   = sd(vowels$logf1[vowels$Filename=="20170829EGlAna"])
-
-vowels$meanLogF1[vowels$Filename=="KoNgaeTaRima"] = mean(vowels$logf1[vowels$Filename=="KoNgaeTaRima"])
-vowels$sdLogF1[vowels$Filename=="KoNgaeTaRima"]   = sd(vowels$logf1[vowels$Filename=="KoNgaeTaRima"])
-
-vowels$meanLogF1[vowels$Filename=="SATN_Election_2011_A_CIM"] = mean(vowels$logf1[vowels$Filename=="SATN_Election_2011_A_CIM"])
-vowels$sdLogF1[vowels$Filename=="SATN_Election_2011_A_CIM"]   = sd(vowels$logf1[vowels$Filename=="SATN_Election_2011_A_CIM"])
-
-#-----
-
-vowels$meanLogF2[vowels$Filename=="EDS1PiriMarearai20150529HSB"] = mean(vowels$logf2[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
-vowels$sdLogF2[vowels$Filename=="EDS1PiriMarearai20150529HSB"]   = sd(vowels$logf2[vowels$Filename=="EDS1PiriMarearai20150529HSB"])
-
-vowels$meanLogF2[vowels$Filename=="atiu-targetWords-20171029"] = mean(vowels$logf2[vowels$Filename=="atiu-targetWords-20171029"])
-vowels$sdLogF2[vowels$Filename=="atiu-targetWords-20171029"]   = sd(vowels$logf2[vowels$Filename=="atiu-targetWords-20171029"])
-
-vowels$meanLogF2[vowels$Filename=="EMM20160413MuseumWordStressZ"] = mean(vowels$logf2[vowels$Filename=="EMM20160413MuseumWordStressZ"])
-vowels$sdLogF2[vowels$Filename=="EMM20160413MuseumWordStressZ"]   = sd(vowels$logf2[vowels$Filename=="EMM20160413MuseumWordStressZ"])
-
-vowels$meanLogF2[vowels$Filename=="ETauRongo20160414HSBNWS"] = mean(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBNWS"])
-vowels$sdLogF2[vowels$Filename=="ETauRongo20160414HSBNWS"]   = sd(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBNWS"])
-
-vowels$meanLogF2[vowels$Filename=="ETauRongo20160414HSBSentences"] = mean(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBSentences"])
-vowels$sdLogF2[vowels$Filename=="ETauRongo20160414HSBSentences"]   = sd(vowels$logf2[vowels$Filename=="ETauRongo20160414HSBSentences"])
-
-vowels$meanLogF2[vowels$Filename=="glottals-aitutaki-20170829-1447"] = mean(vowels$logf2[vowels$Filename=="glottals-aitutaki-20170829-1447"])
-vowels$sdLogF2[vowels$Filename=="glottals-aitutaki-20170829-1447"]   = sd(vowels$logf2[vowels$Filename=="glottals-aitutaki-20170829-1447"])
-
-vowels$meanLogF2[vowels$Filename=="20170829EGlAna"] = mean(vowels$logf2[vowels$Filename=="20170829EGlAna"])
-vowels$sdLogF2[vowels$Filename=="20170829EGlAna"]   = sd(vowels$logf2[vowels$Filename=="20170829EGlAna"])
-
-vowels$meanLogF2[vowels$Filename=="KoNgaeTaRima"] = mean(vowels$logf2[vowels$Filename=="KoNgaeTaRima"])
-vowels$sdLogF2[vowels$Filename=="KoNgaeTaRima"]   = sd(vowels$logf2[vowels$Filename=="KoNgaeTaRima"])
-
-vowels$meanLogF2[vowels$Filename=="SATN_Election_2011_A_CIM"] = mean(vowels$logf2[vowels$Filename=="SATN_Election_2011_A_CIM"])
-vowels$sdLogF2[vowels$Filename=="SATN_Election_2011_A_CIM"]   = sd(vowels$logf2[vowels$Filename=="SATN_Election_2011_A_CIM"])
+# yes, i know i shouldn't have loops in R. bite me.
+files = unique(vowels$Filename)
+for(i in files){
+  vowels$meanLogF1[vowels$Filename==i] = mean(vowels$logf1[vowels$Filename==i])
+  vowels$sdLogF1[vowels$Filename==i]   = sd(vowels$logf1[vowels$Filename==i])
+  vowels$meanLogF2[vowels$Filename==i] = mean(vowels$logf2[vowels$Filename==i])
+  vowels$sdLogF2[vowels$Filename==i]   = sd(vowels$logf2[vowels$Filename==i])
+}
 
 vowels$zf1 = (vowels$logf1-vowels$meanLogF1) / vowels$sdLogF1
 vowels$zf2 = (vowels$logf2-vowels$meanLogF2) / vowels$sdLogF2
-
 unique(vowels$meanLogF1)
-
 
 
 # =================================
@@ -194,100 +145,154 @@ ggplot(data = s, aes(x = zf2, y = zf1, color = phone, label = phone)) + facet_wr
 # ===============================
 
 s = subset(vowels, duration < 1)
+unique(s$phone)
 s$vLength = as.factor(as.character(s$vLength))
 s$vLength = factor(s$vLength,levels(s$vLength)[c(2,1)])
 ggplot(s, aes(x=vLength, y=duration, fill=island))+ geom_boxplot()+
-  scale_y_continuous(limits=c(0,0.6)) + 
+  scale_y_continuous(limits=c(0,0.35)) + 
   facet_grid(. ~ segment)
 
+s$phone = as.factor(as.character(s$phone))
+table(s$phone, s$island)
 
-
-# ===============================
+# ========================================================================================
 # Diphthongs
-# ===============================
+# ========================================================================================
 
-fileDiph = "C:\\Users\\Bender\\Desktop\\rolando\\universidad\\dartmouth\\research\\201907 cim vowels\\cim-diph-20190701-2148.csv"
-diph <- read.csv(file=fileDiph, header=FALSE, sep=",")
-diph = subset(diph, V1 != "diphthong")
-colnames(diph) = c("diphthong", "Filename", "TextGridLabel", "Word", "PreviousLabel", "FollowingLabel", "start", "end", "duration", "f0_0point", "f0_10point", "f0_20point", "f0_25point", "f0_30point", "f0_33point", "f0_40point", "f0_50point", "f0_60point", "f0_67point", "f0_70point", "f0_75point", "f0_80point", "f0_90point", "f0_100point", "F1_midpoint", "F2_midpoint", "F3_midpoint", "intensity_midpoint", "next_Filename", "next_TextGridLabel", "next_Word", "next_PreviousLabel", "next_FollowingLabel", "next_start", "next_end", "next_duration", "next_f0_0point", "next_f0_10point", "next_f0_20point", "next_f0_25point", "next_f0_30point", "next_f0_33point", "next_f0_40point", "next_f0_50point", "next_f0_60point", "next_f0_67point", "next_f0_70point", "next_f0_75point", "next_f0_80point", "next_f0_90point", "next_f0_100point", "next_F1_midpoint", "next_F2_midpoint", "next_F3_midpoint", "next_intensity_midpoint", "")
-diph$F1_midpoint = as.double(as.character(diph$F1_midpoint))
-diph$F2_midpoint = as.double(as.character(diph$F2_midpoint))
-diph$next_F1_midpoint = as.double(as.character(diph$next_F1_midpoint))
-diph$next_F2_midpoint = as.double(as.character(diph$next_F2_midpoint))
-
-
-
+diph = subset(cim, type == "diphthong")
 # Create additional information 
-diph$vLength = "long"
-diph$vLength[diph$TextGridLabel=="a" | diph$TextGridLabel=="e" | diph$TextGridLabel=="i" | diph$TextGridLabel=="o" | diph$TextGridLabel=="u"] = "short"
 diph$island = "Mangaia"  # EDS1PiriMarearai20150529HSB
 diph$island[diph$Filename=="atiu-targetWords-20171029"] = "Atiu"
 diph$island[diph$Filename=="EMM20160413MuseumWordStressZ"] = "Ma'uke"
 diph$island[diph$Filename=="ETauRongo20160414HSBNWS"] = "Rarotonga"
 diph$island[diph$Filename=="ETauRongo20160414HSBSentences"] = "Rarotonga"
 diph$island[diph$Filename=="glottalsaitutaki201708291447"] = "Aitutaki"
+diph$island[vowels$Filename=="20170829EGlAna"] = "Aitutaki"
 diph$island[diph$Filename=="KoNgaeTaRima"] = "Rarotonga"
 diph$island[diph$Filename=="SATN_Election_2011_A_CIM"] = "Rarotonga"
 diph$island = as.factor(diph$island)
 unique(diph$island)
-diph$segment = "a"
-diph$segment[diph$TextGridLabel == "a" | diph$TextGridLabel == "ā"] = "a"
-diph$segment[diph$TextGridLabel == "e" | diph$TextGridLabel == "ē"] = "e"
-diph$segment[diph$TextGridLabel == "i" | diph$TextGridLabel == "ī"] = "i"
-diph$segment[diph$TextGridLabel == "o" | diph$TextGridLabel == "ō"] = "o"
-diph$segment[diph$TextGridLabel == "u" | diph$TextGridLabel == "ū"] = "u"
-diph$segment = as.factor(diph$segment)
-unique(diph$segment)
 
-table(diph$diphthong, diph$island)
+# =================================
+# leave only hand-corrected vowels
+# =================================
 
+unique(diph$Filename)
+diph$start = as.numeric(as.character(diph$start))
+diph$duration = as.numeric(as.character(diph$duration))
 
-# simulate some diphthongs; not terribly realistic values
-f1delta <- sample(c(-10:-5, 5:15), nrow(indo), replace = TRUE)
-f2delta <- sample(c(-15:-10, 20:30), nrow(indo), replace = TRUE)
-f1coefs <- matrix(sample(c(2:5), nrow(indo) * 4, replace = TRUE), nrow = nrow(indo))
-f2coefs <- matrix(sample(c(3:6), nrow(indo) * 4, replace = TRUE), nrow = nrow(indo))
-indo <- within(indo, {
-  f1a <- f1 + f1delta * f1coefs[, 1]
-  f2a <- f2 + f2delta * f2coefs[, 1]
-  f1b <- f1a + f1delta * f1coefs[, 2]
-  f2b <- f2a + f2delta * f2coefs[, 2]
-  f1c <- f1b + f1delta * f1coefs[, 3]
-  f2c <- f2b + f2delta * f2coefs[, 3]
-  f1d <- f1c + f1delta * f1coefs[, 4]
-  f2d <- f2c + f2delta * f2coefs[, 4]
-})
-with(indo, plotVowels(cbind(f1, f1a, f1b, f1c, f1d), cbind(f2, f2a, f2b, f2c, f2d), 
-                      vowel, plot.tokens = TRUE, pch.tokens = NA, alpha.tokens = 0.2, plot.means = TRUE, 
-                      pch.means =vowel, cex.means = 2, var.col.by = vowel, pretty = TRUE, 
-                      diph.arrows = TRUE, diph.args.tokens = list(lwd = 0.8), diph.args.means = list(lwd = 3), 
-                      family = "Charis SIL"))
+diph = subset(diph, type=="diphthong" & 
+                  ((Filename == "ETauRongo20160414HSBNWS" & start<60) | 
+                     (Filename == "EDS1PiriMarearai20150529HSB" & start<130)|
+                     (Filename == "EMM20160413MuseumWordStressZ" & start<120)|
+                     (Filename == "20170829EGlAna"& start<100)|
+                     (Filename == "SATN_Election_2011_A_CIM")
+                  ))
 
-unique(diph$diphthong)
-diph$F1_midpoint
-d = subset(diph, diphthong=="ae" | diphthong=="ai"| diphthong=="ao" | diphthong=="au")
-d = subset(diph, diphthong=="ei")
-d = subset(diph, diphthong=="ea" | diphthong=="ei"| diphthong=="eo" | diphthong=="eu")
-d = subset(diph, diphthong=="ia" | diphthong=="ie"| diphthong=="io" | diphthong=="iu")
-d = subset(diph, diphthong=="oa" | diphthong=="oe"| diphthong=="oi" | diphthong=="ou")
-d = subset(diph, diphthong=="ua" | diphthong=="ue"| diphthong=="ui" | diphthong=="uo")
-with(d, plotVowels(cbind(F1_midpoint, next_F1_midpoint), cbind(F2_midpoint, next_F2_midpoint), 
-                      xlim=c(2500,1000),ylim=c(1000,200),
-                      diphthong, plot.tokens = TRUE, pch.tokens = NA, alpha.tokens = 0.2, plot.means = TRUE, 
-                      pch.means =diphthong, cex.means = 2, var.col.by = diphthong, pretty = TRUE, 
-                      diph.arrows = TRUE, diph.args.tokens = list(lwd = 0.8), diph.args.means = list(lwd = 3), 
-                      family = "Charis SIL"))
+diph = subset(diph, duration > 0.005)
 
+# =================================
+# normalization
+# =================================
+
+# log
+diph$logf1 = log(diph$F1_midpoint)
+diph$logf2 = log(diph$F2_midpoint)
+diph$next_logf1 = log(diph$next_F1_midpoint)
+diph$next_logf2 = log(diph$next_F2_midpoint)
+
+diph$meanLogF1 = -999
+diph$sdLogF1 = -999
+diph$next_meanLogF1 = -999
+diph$next_sdLogF1 = -999
+
+mean(c(1,2))
+
+files = unique(diph$Filename)
+for(i in files){
+  diph$meanLogF1[diph$Filename==i] = mean(c(diph$logf1[diph$Filename==i],diph$next_logf1[diph$Filename==i]))
+  diph$sdLogF1[diph$Filename==i] = sd(c(diph$logf1[diph$Filename==i],diph$next_logf1[diph$Filename==i]))
+  diph$meanLogF2[diph$Filename==i] = mean(c(diph$logf2[diph$Filename==i],diph$next_logf2[diph$Filename==i]))
+  diph$sdLogF2[diph$Filename==i] = sd(c(diph$logf2[diph$Filename==i],diph$next_logf2[diph$Filename==i]))
+}
+
+diph$zf1 = (diph$logf1-diph$meanLogF1) / diph$sdLogF1
+diph$zf2 = (diph$logf2-diph$meanLogF2) / diph$sdLogF2
+diph$next_zf1 = (diph$next_logf1-diph$meanLogF1) / diph$sdLogF1
+diph$next_zf2 = (diph$next_logf2-diph$meanLogF2) / diph$sdLogF2
+unique(diph$meanLogF1)
+
+#============
+# charts
+#============
+
+d = diph
+d = subset(diph, phone=="au")
+table(d$island, d$phone)
 
 with(d, plotVowels(cbind(F1_midpoint, next_F1_midpoint), cbind(F2_midpoint, next_F2_midpoint), 
                    xlim=c(2500,1000),ylim=c(1000,200),
+                   phone, plot.tokens = TRUE, pch.tokens = NA, alpha.tokens = 0.2, plot.means = TRUE, 
+                   pch.means =phone, cex.means = 2, var.col.by = phone, pretty = TRUE, 
+                   diph.arrows = TRUE, diph.args.tokens = list(lwd = 0.8), diph.args.means = list(lwd = 3), 
+                   family = "Charis iSIL"))
+
+
+with(d, plotVowels(cbind(zf1, next_zf1), cbind(zf2, next_zf2), 
+                   xlim=c(1.5,-2.5),ylim=c(2,-2),
                    island, plot.tokens = TRUE, pch.tokens = NA, alpha.tokens = 0.2, plot.means = TRUE, 
                    pch.means =island, cex.means = 2, var.col.by = island, pretty = TRUE, 
                    diph.arrows = TRUE, diph.args.tokens = list(lwd = 0.8), diph.args.means = list(lwd = 3), 
                    family = "Charis SIL"))
 
-table(d$diphthong)
-table(d$island)
-cbind(d$F1_midpoint, d$next_F1_midpoint)
 
-t = subset(d, diphthong="")
+
+
+# ==================================================================================
+# error measurement
+# ==================================================================================
+
+fileERR = "C:\\Users\\Bender\\Desktop\\rolando\\universidad\\dartmouth\\research\\201907 cim vowels\\error-check-20190729-0045.csv"
+err <- read.csv(file=fileERR, header=TRUE, sep=",")
+
+err$type = "Other"
+err$type[err$textoIntervalo == "a" | err$textoIntervalo == "e" | err$textoIntervalo == "i" | err$textoIntervalo == "o" | err$textoIntervalo == "u"] = "Short vowel"
+err$type[err$textoIntervalo == "ax" | err$textoIntervalo == "ex" | err$textoIntervalo == "ix" | err$textoIntervalo == "ox" | err$textoIntervalo == "ux"] = "Long vowel"  #āēīōū
+err$type[err$textoIntervalo == "m" | err$textoIntervalo == "n" | err$textoIntervalo == "ng"] = "Nasal"
+err$type[err$textoIntervalo == "l" | err$textoIntervalo == "r"] = "Liquid"
+err$type[err$textoIntervalo == "p" | err$textoIntervalo == "t" | err$textoIntervalo == "k"] = "Stop"
+err$type[err$textoIntervalo == "'" | err$textoIntervalo == "êžŒ"] = "Glottal Stop"
+err$type[err$textoIntervalo == "v"] = "Fricative"
+err$type = as.factor(err$type)
+unique(err$type)
+
+t = subset(err, type=="Other")
+
+e = subset(err, tipoIntervalo=="palabra" & difTamaÃ.oPorciento < 1.5)
+e = subset(err, tipoIntervalo=="fonema" & difTamaÃ.oPorciento < 1.5)
+e = subset(err, type=="Short vowel" & difTamaÃ.oPorciento< 3)
+e = subset(err, type=="Long vowel" & difTamaÃ.oPorciento< 3)
+e = subset(err, type=="Nasal" & difTamaÃ.oPorciento< 3)
+e = subset(err, difTamaÃ.oPorciento< 1)
+e = err
+mean(e$difTamaÃ.oPorciento)
+
+ggplot(e, aes(x=type, y=difTamaÃ.oPorciento)) + 
+  geom_boxplot()+
+  facet_wrap( ~ island, ncol=2)
+
+ggplot(e, aes(x=type, y=difTamaÃ.oPorciento)) + 
+  geom_boxplot()
+
+p = subset(err, tipoIntervalo=="palabra" & difTamaÃ.oPorciento < 2)
+ggplot(p, aes(x=island, y=difTamaÃ.oPorciento)) + 
+  geom_boxplot()
+p = subset(err, tipoIntervalo=="fonema")
+p = subset(err, tipoIntervalo=="palabra" & difTamaÃ.oPorciento < 2)
+
+print("error for word centers")
+tapply(p$difTamaÃ.oPorciento, p$island, mean)
+print("error for the phoneme centers")
+tapply(p$difTamaÃ.oPorciento, p$type, mean)
+
+
