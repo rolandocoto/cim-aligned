@@ -3,11 +3,17 @@ import string
 import sys
 
 def change_long_for_x(inText):
-  outText =  inText.replace("ā", "ax")
+  outText = inText.replace("ā", "ax")
   outText = outText.replace("ē", "ex")
   outText = outText.replace("ī", "ix")
   outText = outText.replace("ō", "ox")
   outText = outText.replace("ū", "ux")
+  outText = outText.replace("Ā", "AX")
+  outText = outText.replace("Ē", "EX")
+  outText = outText.replace("Ī", "IX")
+  outText = outText.replace("Ō", "OX")
+  outText = outText.replace("Ū", "UX")
+  outText = outText.replace("ꞌ", "'")
   return outText
   
 def change_x_for_long(inText):
@@ -287,8 +293,8 @@ if __name__ == "__main__":
 			
 				joinedLetter = letter + nextLetter
 				joinedLetter = change_long_for_x(joinedLetter)
-				#resLines.append(joinedLetter + "," + "diphthong" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + syllPos + "," + inputCSV[lineNumber+1].replace("\n",""))
-				res += joinedLetter + "," + "diphthong" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + nextConsonantInSameWord + "," + nextVowelInSameWord + "," + syllPos + "," + inputCSV[lineNumber+1]
+				resLines.append(joinedLetter + "," + "diphthong" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," +nextConsonantInSameWord + "," + nextVowelInSameWord + ","+ syllPos + "," + inputCSV[lineNumber+1].replace("\n",""))
+				#res += joinedLetter + "," + "diphthong" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + nextConsonantInSameWord + "," + nextVowelInSameWord + "," + syllPos + "," + inputCSV[lineNumber+1]
 				sylls.append(syllPos)
 				words.append(word)
 				csvTotLines = csvTotLines + 1
@@ -313,8 +319,8 @@ if __name__ == "__main__":
 				elif (syllPosInit == 0 and syllPosEnd == 0):
 					syllPos = "mid"
 				
-				res += change_long_for_x(letter) + "," + "vowel" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + nextConsonantInSameWord + "," + nextVowelInSameWord + "," + syllPos + "\r\n"
-				#resLines.append(change_long_for_x(letter) + "," + "vowel" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + syllPos + ",,,,,,,,,,,,,,,,,,,,,,,,,,,")
+				#res += change_long_for_x(letter) + "," + "vowel" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + nextConsonantInSameWord + "," + nextVowelInSameWord + "," + syllPos + "\r\n"
+				resLines.append(change_long_for_x(letter) + "," + "vowel" + "," + line + "," + prevConsonantInSameWord + "," + prevVowelInSameWord + "," + nextConsonantInSameWord + "," + nextVowelInSameWord + "," + syllPos + ",,,,,,,,,,,,,,,,,,,,,,,,,,,")
 				sylls.append(syllPos)
 				words.append(word)
 				csvTotLines = csvTotLines + 1
@@ -357,11 +363,12 @@ if __name__ == "__main__":
 	#	print(sylls[csvIterator] + "-" + words[csvIterator])
 	#	csvIterator = csvIterator+1
 	
-	#csvIterator = 0	
-	#while csvIterator < len(sylls):
-	#	if (resLines[csvIterator] != ""):
-	#		res += resLines[csvIterator] + "," + sylls[csvIterator] + "\r\n"
-	#	csvIterator = csvIterator+1
+	csvIterator = 0	
+	while csvIterator < len(sylls):
+		if (resLines[csvIterator] != ""):
+			res += resLines[csvIterator] + "," + sylls[csvIterator] + "\r\n"
+		csvIterator = csvIterator+1
 	
-	res = res.replace(",","\t")
+	#res = res.replace(",","\t")
+	res = change_long_for_x(res)
 	open("cim-phones.csv", "wb").write((res.encode('utf-8','replace')))
