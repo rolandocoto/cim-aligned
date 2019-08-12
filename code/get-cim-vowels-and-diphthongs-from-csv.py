@@ -29,10 +29,8 @@ if __name__ == "__main__":
 	inputCSV = open(inFilePath, encoding='utf-8').readlines()
 
 	vowels = ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū"]
-	header = "phone,type,Filename,TextGridLabel,Word,PreviousLabel,FollowingLabel,start,end,duration,f0_0point,f0_10point,f0_20point,f0_25point,f0_30point,f0_33point,f0_40point,f0_50point,f0_60point,f0_67point,f0_70point,f0_75point,f0_80point,f0_90point,f0_100point,F1_midpoint,F2_midpoint,F3_midpoint,intensity_midpoint,prevConsonant,prevVowel,nextConsonant,nextVowel,syllPos,next_Filename,next_TextGridLabel,next_Word,next_PreviousLabel,next_FollowingLabel,next_start,next_end,next_duration,next_f0_0point,next_f0_10point,next_f0_20point,next_f0_25point,next_f0_30point,next_f0_33point,next_f0_40point,next_f0_50point,next_f0_60point,next_f0_67point,next_f0_70point,next_f0_75point,next_f0_80point,next_f0_90point,next_f0_100point,next_F1_midpoint,next_F2_midpoint,next_F3_midpoint,next_intensity_midpoint,syllType"
+	header = "phone,type,Filename,TextGridLabel,Word,PreviousLabel,FollowingLabel,start,end,duration,f0_0point,f0_10point,f0_20point,f0_25point,f0_30point,f0_33point,f0_40point,f0_50point,f0_60point,f0_67point,f0_70point,f0_75point,f0_80point,f0_90point,f0_100point,F1_midpoint,F2_midpoint,F3_midpoint,intensity_midpoint,prevConsonant,prevVowel,nextConsonant,nextVowel,syllPos,next_Filename,next_TextGridLabel,next_Word,next_PreviousLabel,next_FollowingLabel,next_start,next_end,next_duration,next_f0_0point,next_f0_10point,next_f0_20point,next_f0_25point,next_f0_30point,next_f0_33point,next_f0_40point,next_f0_50point,next_f0_60point,next_f0_67point,next_f0_70point,next_f0_75point,next_f0_80point,next_f0_90point,next_f0_100point,next_F1_midpoint,next_F2_midpoint,next_F3_midpoint,next_intensity_midpoint,syllType,totSylls"
 	
-	#header = "phone,type,Filename,TextGridLabel,Word,PreviousLabel,FollowingLabel,start,end,duration,f0_0point,f0_10point,f0_20point,f0_25point,f0_30point,f0_33point,f0_40point,f0_50point,f0_60point,f0_67point,f0_70point,f0_75point,f0_80point,f0_90point,f0_100point,F1_midpoint,F2_midpoint,F3_midpoint,intensity_midpoint,prevConsonant,prevVowel,syllPos,next_Filename,next_TextGridLabel,next_Word,next_PreviousLabel,next_FollowingLabel,next_start,next_end,next_duration,next_f0_0point,next_f0_10point,next_f0_20point,next_f0_25point,next_f0_30point,next_f0_33point,next_f0_40point,next_f0_50point,next_f0_60point,next_f0_67point,next_f0_70point,next_f0_75point,next_f0_80point,next_f0_90point,next_f0_100point,next_F1_midpoint,next_F2_midpoint,next_F3_midpoint,next_intensity_midpoint"
-
 	lineNumber = 1
 	csvTotLines = 0
 	totLines = len(inputCSV)
@@ -330,10 +328,8 @@ if __name__ == "__main__":
 
 	
 	# add syllable position and quantity information
-	
-
-	
 	csvLines = res.split("\r\n")
+	syllCount = words.copy()
 	csvIterator = 0
 	nextSyll = ""
 	
@@ -363,10 +359,28 @@ if __name__ == "__main__":
 	#	print(sylls[csvIterator] + "-" + words[csvIterator])
 	#	csvIterator = csvIterator+1
 	
+	
+	csvIterator = 0
+	j = 0
+	k = 0
+	tWord = ""
+	while csvIterator < len(words):
+		tWord = words[csvIterator]
+		while ((csvIterator+k) < len(words) and tWord == words[csvIterator+k]):
+			k = k+1
+		while (j < k):
+			syllCount[csvIterator+j] = k
+			j = j+1
+		csvIterator = csvIterator+k
+		k = 0
+		j = 0
+	
+	
+	# put together the phonetic and syllable info
 	csvIterator = 0	
 	while csvIterator < len(sylls):
 		if (resLines[csvIterator] != ""):
-			res += resLines[csvIterator] + "," + sylls[csvIterator] + "\r\n"
+			res += resLines[csvIterator] + "," + sylls[csvIterator] + "," + str(syllCount[csvIterator]) + "\r\n"
 		csvIterator = csvIterator+1
 	
 	#res = res.replace(",","\t")
